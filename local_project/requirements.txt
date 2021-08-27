@@ -2,3 +2,5 @@ numpy
 tensorflow
 sklearn
 matplotlib
+torch
+torch-tb-profiler

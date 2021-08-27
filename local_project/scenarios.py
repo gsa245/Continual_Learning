@@ -111,8 +111,8 @@ class Experiment:
 
     def runRandomVSFIFOReplayExperiment(self,experiment_name,usecase,replay_size=5000,random_selection=False):
         print("> Running Random VS FIFO Replay experiment")
-        #dataset = CORE50(root='C:/Users/User/Desktop/CYENS_repositories/Datasets/cor50/', scenario="nicv2_391",preload=True)
-        dataset = CORE50(root='/home/giorgos/cor50dataset/core50_128x128/', scenario="nicv2_391", preload=False)
+        
+        dataset = CORE50(root='D:/core50dataset/core50_128x128/', scenario="nicv2_391", preload=False)
         test_x, test_y = dataset.get_test_set()
         test_x = preprocess(test_x)
 

@@ -1,13 +1,14 @@
 <resources>
-    <string name="app_name">Continual Learning Demo</string>
+    <string name="app_name">CL Demo App</string>
 
-    <string name="inference_mode_title">Transfer Learning Inference</string>
-    <string name="inference_mode_title_cl">Continual Learning Inference</string>
-    <string name="capture_mode_title">Train Both Models</string>
+    <string name="inference_mode_title">TL</string>
+    <string name="inference_mode_title_cl">CL</string>
+    <string name="capture_mode_title">Both</string>
 
     <string name="train_action">Train</string>
     <string name="pause_action">STOP TRAINING</string>
     <string name="resume_action">Train New Samples</string>
 
     <string name="switch_to_inference_hint">You can switch back to inference mode now.</string>
+    <string name="reset_models_and_restart_app">RESET AND RESTART</string>
 </resources>
