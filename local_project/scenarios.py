@@ -5,15 +5,72 @@ import tensorflow as tf
 from matplotlib import pyplot as plt
 import json
 
-class Experiments:
+class Experiment:
 
-    def __init__(self):
+    def __init__(self,input_args):
         print("> Experiments Initialized")
+        self.args = input_args
+    def run(self):
+
+        if self.args.exp_tl_vs_cl:
+
+            print("> Experiment: Continual Learning VS Transfer Learning")
+            self.runRandomVSFIFOReplayExperiment(experiment_name="CONTINUAL_VS_TRANSFER_LEARNING",
+                                                        usecase="Continual Learning", replay_size=7500,
+                                                        random_selection=True)
+            self.runTransferLearningExperiment(experiment_name="CONTINUAL_VS_TRANSFER_LEARNING",
+                                                        usecase="Transfer Learning")
+            
+        elif self.args.exp_sample_replacement:
+
+            print("> Experiment: FIFO VS Random Selection - Buffer Sample Replacement")
+            self.runRandomVSFIFOReplayExperiment(experiment_name="FIFO_VS_RANDOM_SELECTION_BS_10000", usecase="FIFO",
+                                                        replay_size=10000, random_selection=False)
+            self.runRandomVSFIFOReplayExperiment(experiment_name="FIFO_VS_RANDOM_SELECTION_BS_10000",
+                                                        usecase="RANDOM SELECTION", replay_size=10000,
+                                                        random_selection=True)
+            
+        elif self.args.exp_buffer_size:
+
+            print("> Experiment: Replay Buffer Size")
+            self.runRandomVSFIFOReplayExperiment(experiment_name="REPLAY_BUFFER_SIZE_EXPERIMENTS",
+                                                        usecase="RBS_3000",
+                                                        replay_size=3100, random_selection=True)
+            self.runRandomVSFIFOReplayExperiment(experiment_name="REPLAY_BUFFER_SIZE_EXPERIMENTS",
+                                                        usecase="RBS_5000",
+                                                        replay_size=5000, random_selection=True)
+            self.runRandomVSFIFOReplayExperiment(experiment_name="REPLAY_BUFFER_SIZE_EXPERIMENTS",
+                                                        usecase="RBS_7500",
+                                                        replay_size=7500, random_selection=True)
+            self.runRandomVSFIFOReplayExperiment(experiment_name="REPLAY_BUFFER_SIZE_EXPERIMENTS",
+                                                        usecase="RBS_10000",
+                                                        replay_size=10000, random_selection=True)
+            self.runRandomVSFIFOReplayExperiment(experiment_name="REPLAY_BUFFER_SIZE_EXPERIMENTS",
+                                                        usecase="RBS_15000",
+                                                        replay_size=15000, random_selection=True)
+            self.runRandomVSFIFOReplayExperiment(experiment_name="REPLAY_BUFFER_SIZE_EXPERIMENTS",
+                                                        usecase="RBS_20000",
+                                                        replay_size=20000, random_selection=True)
+            self.runRandomVSFIFOReplayExperiment(experiment_name="REPLAY_BUFFER_SIZE_EXPERIMENTS",
+                                                        usecase="RBS_30000",
+                                                        replay_size=30000, random_selection=True)
+            
+
+    def plot(self):
+
+        if self.args.exp_tl_vs_cl:
+            self.plotExperiment(experiment_name="CONTINUAL_VS_TRANSFER_LEARNING", title="Continual VS Transfer Learning (CORe50 NICv2 - 391)")
+        
+        elif self.args.exp_sample_replacement:
+            self.plotExperiment(experiment_name="FIFO_VS_RANDOM_SELECTION_BS_10000", title="FIFO VS Random Selection (CORe50 NICv2 - 391)")
+        
+        elif self.args.exp_buffer_size:
+            self.plotExperiment(experiment_name="REPLAY_BUFFER_SIZE_EXPERIMENTS",  title="Replay Buffer Size Experiments (CORe50 NICv2 - 391)")
 
     def plotExperiment(self,experiment_name,title):
         min_val = 100
         max_val = 50
-        with open('experiments/' + experiment_name + '.json', ) as json_file:
+        with open('config/' + experiment_name + '.json', ) as json_file:
             usecases = json.load(json_file)
             for usecase in usecases:
                 for key, value in usecase.items():
@@ -38,13 +95,13 @@ class Experiments:
         data = []
 
         # Load previously recorded usescases
-        with open('experiments/'+experiment_name+'.json', ) as json_file:
+        with open('config/'+experiment_name+'.json', ) as json_file:
             usecases = json.load(json_file)
             for usecase in usecases:
                 data.append(usecase)
 
         # Store new usecase
-        with open('experiments/'+experiment_name+'.json', 'w') as outfile:
+        with open('config/'+experiment_name+'.json', 'w') as outfile:
             exp = dict()
             exp[usecase_name] = dict()
             exp[usecase_name]["acc"] = accuracies

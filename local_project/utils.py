@@ -1,5 +1,12 @@
 import numpy as np
+import argparse
 
+def readArgs():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--exp_tl_vs_cl", action="store_true")
+    parser.add_argument("--exp_sample_replacement", action="store_true")
+    parser.add_argument("--exp_buffer_size", action="store_true")
+    return parser
 
 def preprocess(images, scale=True, norm=False):
     if scale:
