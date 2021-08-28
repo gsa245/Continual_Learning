@@ -10,6 +10,9 @@ class Experiment:
     def __init__(self,input_args):
         print("> Experiments Initialized")
         self.args = input_args
+        self.experiment_name = None
+        for exp in vars(self.args):
+
     def run(self):
 
         if self.args.exp_tl_vs_cl:
