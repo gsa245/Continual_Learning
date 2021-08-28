@@ -174,9 +174,8 @@ class Experiment:
 
 
     def runTransferLearningExperiment(self, experiment_name, usecase):
-        print("> Running Random VS FIFO Replay experiment")
-        # dataset = CORE50(root='C:/Users/User/Desktop/CYENS_repositories/Datasets/cor50/', scenario="nicv2_391",preload=True)
-        dataset = CORE50(root='/home/giorgos/cor50dataset/core50_128x128/', scenario="nicv2_391", preload=False)
+        print("> Transfer Learning Experiment")
+        dataset = CORE50(root='D:/core50dataset/core50_128x128/', scenario="nicv2_391", preload=False)
         test_x, test_y = dataset.get_test_set()
         test_x = preprocess(test_x)
 
@@ -235,8 +234,7 @@ class Experiment:
 
     def runTestExperiment(self):
         print("> Running test experiment")
-        #dataset = CORE50(root='C:/Users/User/Desktop/CYENS_repositories/Datasets/cor50/', scenario="nicv2_391",preload=True)
-        dataset = CORE50(root='/home/giorgos/cor50dataset/core50_128x128/', scenario="nicv2_391",preload=False)
+        dataset = CORE50(root='D:/core50dataset/core50_128x128/', scenario="nicv2_391",preload=False)
         test_x, test_y = dataset.get_test_set()
         test_x = preprocess(test_x)
 
