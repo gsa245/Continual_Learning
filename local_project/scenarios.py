@@ -1,8 +1,8 @@
 from models import TransferLearningModel, TestModel
 from data_loader import CORE50
 from utils import *
-import tensorflow as tf
 from matplotlib import pyplot as plt
+import tensorflow as tf
 import json
 
 class Experiment:
@@ -10,19 +10,19 @@ class Experiment:
     def __init__(self,input_args):
         print("> Experiments Initialized")
         self.args = input_args
-        self.experiment_name = None
-        for exp in vars(self.args):
 
     def run(self):
 
         if self.args.exp_tl_vs_cl:
 
             print("> Experiment: Continual Learning VS Transfer Learning")
+            self.runTransferLearningExperiment(experiment_name="CONTINUAL_VS_TRANSFER_LEARNING",
+                                                        usecase="Transfer Learning")
+                                                        
             self.runRandomVSFIFOReplayExperiment(experiment_name="CONTINUAL_VS_TRANSFER_LEARNING",
                                                         usecase="Continual Learning", replay_size=7500,
                                                         random_selection=True)
-            self.runTransferLearningExperiment(experiment_name="CONTINUAL_VS_TRANSFER_LEARNING",
-                                                        usecase="Transfer Learning")
+            
             
         elif self.args.exp_sample_replacement:
 
